@@ -44,6 +44,22 @@ export default async function RootLayout(props: Props) {
           crossOrigin="anonymous"
         />
 
+{/* Google Analytics - Utilisez 'beforeInteractive' ou placez-le plus haut */}
+<Script
+  strategy="afterInteractive" // Gardez afterInteractive pour la performance
+  src="https://www.googletagmanager.com/gtag/js?id=G-E9G0HVN0DF"
+/>
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E9G0HVN0DF', {
+      page_path: window.location.pathname,
+    });
+  `}
+</Script>
+
 {/*
 <Script
     id="adsense-init"
@@ -482,23 +498,7 @@ export default async function RootLayout(props: Props) {
           </Script>
         </IntlProvider>
       
-       {/* Google Analytics - Script async */}
-       <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-6G7NCZPPCJ"
-        />
-
-        {/* Google Analytics - Initialisation */}
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-6G7NCZPPCJ', {
-              page_path: window.location.pathname,
-            });
-          `}
-        </Script>
+      
       </body>
     </html>
   );
